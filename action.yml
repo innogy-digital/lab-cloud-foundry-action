@@ -1,0 +1,45 @@
+name: 'Innogy Cloud Foundry CLI Action'
+description: 'GitHub Action for Innogy PCF'
+inputs:
+  sshProxyServer:
+    description: 'Server for the ssh server'
+    required: true
+  sshProxyUser:
+    description: 'Username for the ssh server'
+    required: true
+  sshProxyPem:
+    description: 'PEM for the ssh server'
+    required: true
+  cfApi:
+    description: 'CF API Endpoint'
+    required: true
+  cfOrg:
+    description: 'CF Org'
+    required: true
+  cfSpace:
+    description: 'CF Space'
+    required: true
+  cfUsername:
+    description: 'CF Username'
+    required: true
+  cfPassword:
+    description: 'CF Password'
+    required: true
+  cfArgs:
+    description: 'CF Args'
+    required: true
+
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  env:
+    SSH_PROXY_SERVER: '${{ inputs.sshProxyServer }}'
+    SSH_PROXY_USER: '${{ inputs.sshProxyUser }}'
+    SSH_PROXY_PEM: '${{ inputs.sshProxyPem }}'
+    CF_API_ENDPOINT: '${{ inputs.cfApi }}'
+    CF_ORG: '${{ inputs.cfOrg }}'
+    CF_SPACE: '${{ inputs.cfSpace }}'
+    CF_USERNAME: '${{ inputs.cfUsername }}'
+    CF_PASSWORD: '${{ inputs.cfPassword }}'
+  args:
+    - ${{ inputs.cfArgs }}
